@@ -11,7 +11,11 @@ class Player {
       }
     }
     else { //something in front
-     warrior.attack();
+      if(warrior.feel().getUnit().isEnemy()){
+        warrior.attack();
+      } else {
+        warrior.rescue();
+      }
    }
    this.lastTurnsHP = warrior.health();
   }
