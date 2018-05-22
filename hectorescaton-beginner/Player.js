@@ -2,15 +2,14 @@ class Player {
   playTurn(warrior) {
     // Cool code goes here.
     let engaged = warrior.health() < this.lastTurnsHP;
-    this.direction = this.direction ? this.direction : 'backward';
 
     //NOTHING IN current DIRECTION
-    if(warrior.feel(this.direction).isEmpty()){
+    if(warrior.feel().isEmpty()){
       if(!engaged && warrior.health() < 20){
         warrior.rest();
       }
       else if(!engaged && warrior.health() == 20){
-        warrior.walk(this.direction);
+        warrior.walk();
       }
       else if(engaged){
         let newDir = warrior.health() > 15 ? 'forward' : 'backward';
@@ -18,17 +17,15 @@ class Player {
       }
     }
     else { //something in front
-      if(warrior.feel(this.direction).getUnit() && warrior.feel(this.direction).getUnit().isEnemy()){
-        warrior.attack(this.direction);
-      } else {
-        if(warrior.feel(this.direction).getUnit() && warrior.feel(this.direction).getUnit().isBound()){
-            warrior.rescue(this.direction);
+      if(warrior.feel().getUnit() && warrior.feel().getUnit().isEnemy()){
+        warrior.attack();
+      } else if(warrior.feel().getUnit() && warrior.feel().getUnit().isBound()){
+          warrior.rescue();
         } else {
           warrior.think('Changing direction');
-          this.direction = 'forward';
+          warrior.pivot();
         }
       }
+      this.lastTurnsHP = warrior.health();
    }
-   this.lastTurnsHP = warrior.health();
-  }
 }
