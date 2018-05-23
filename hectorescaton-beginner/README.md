@@ -4,6 +4,7 @@
 
 > **TIP:** Use `warrior.look()` to determine your surroundings, and `warrior.shoot()` to fire an arrow.
 
+> **CLUE:** Wizards are deadly but low in health. Kill them before they've time to attack.
 
 ### Floor Map
 
